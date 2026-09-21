@@ -6,7 +6,7 @@ using namespace std;
 
 struct student{
     int id;
-    int score;
+    double score;
 };
 
 void selectionSort(array<student, 150>& students) {
@@ -35,10 +35,23 @@ int main() {
         inputFile >> students[i].id >> students[i].score;
     }
 
-    selectionSort(students);                                 // Sort the students by score
+    selectionSort(students);                                // Sort the students by score
 
 
     inputFile.close();                                      // Close the input file
+
+    ofstream outputFile("210-lab-13-grades-sorted.txt");    // Open the output file
+
+    if (!outputFile) {
+        cerr << "Error opening output file." << endl;
+        return 1;
+    }
+
+    for (int i = 0; i < 150; i++) {
+        outputFile << students[i].id << " " << students[i].score << endl;
+    }
+
+    outputFile.close();                                     // Close the output file
 
     return 0;
 }
